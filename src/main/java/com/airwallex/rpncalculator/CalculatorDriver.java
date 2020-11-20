@@ -102,7 +102,6 @@ public class CalculatorDriver {
                 }
             } catch (ArithmeticException ae) {
                 System.out.println(ae.getMessage());
-
             }
         }
     }

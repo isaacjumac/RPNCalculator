@@ -12,6 +12,7 @@
     <packaging>jar</packaging>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.release.version>11</java.release.version>
         <junit.version>4.11</junit.version>
     </properties>

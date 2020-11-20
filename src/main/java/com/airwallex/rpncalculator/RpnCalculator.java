@@ -20,18 +20,14 @@ import java.util.Iterator;
 public class RpnCalculator {
     private Deque<BigDecimal> valueStack;
 
-    // Math context to be used, use DECIMAL128 by default, which provides 34 decimal digit precision
-    public static MathContext context = MathContext.DECIMAL64;
-
     // Default output format, with at most 10 decimal places
     private static final String OUTPUT_FORMAT = "#0.##########";
 
+    // The scale of number, i.e., number of decimal digits. Used to keep precision in calculation for division & sqrt
+    public static final int SCALE = 20;
+
     public RpnCalculator() {
         valueStack = new ArrayDeque<>();
-    }
-
-    public void setContext(MathContext context) {
-        this.context = context;
     }
 
     public void doPlus(BigDecimal operand) {
@@ -51,17 +47,21 @@ public class RpnCalculator {
 
     public void doDivision(BigDecimal operand) {
         if (operand.compareTo(BigDecimal.ZERO) == 0) {
+            recordValue(operand);
             throw new ArithmeticException("Dividing by 0 is not allowed.");
         }
-        BigDecimal result = popValue().divide(operand, context);
+        int precision = operand.stripTrailingZeros().precision() - Math.max(0, operand.stripTrailingZeros().scale()) + SCALE;
+        BigDecimal result = popValue().divide(operand, new MathContext(precision));
         valueStack.push(result);
     }
 
     public void doSquareRoot(BigDecimal operand) {
         if (operand.compareTo(BigDecimal.ZERO) < 0) {
+            recordValue(operand);
             throw new ArithmeticException("Square root of negative number is not valid.");
         }
-        BigDecimal result = operand.sqrt(context);
+        int precision = operand.stripTrailingZeros().precision() - Math.max(0, operand.stripTrailingZeros().scale()) + SCALE;
+        BigDecimal result = operand.sqrt(new MathContext(precision));
         valueStack.push(result);
     }
 
