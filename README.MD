@@ -1,7 +1,7 @@
 # Overview
 This is a command-line based RPN (Reverse Polish Notation) calculator that is able to evaluate user input of numbers 
 and operators/commands and perform corresponding calculation/operation in the RPN manner. For details of how what is RPN
-and how it is evaluated, please refer here: .
+and how it is evaluated, please refer here: https://en.wikipedia.org/wiki/Reverse_Polish_notation.
 
 # How to Use
 ## Prerequisites
