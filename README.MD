@@ -18,9 +18,20 @@ To run this application in command line mode, please execute ```bin/rpn_calculat
 Your input will be evaluated line-by-line, until it is completely evaluated, or an error occurs.
 
 ### Format of Input
-Your input should be whitespace(s)-separated lists of numbers and/or commands. 
+Your input should be whitespace(s)-separated lists of numbers and/or commands. <br>
 To make the usage less painful, leading or trailing whitespace(s) will be ignored and no error will occur. Multiple 
-whitespace(s) in between numbers/commands are also OK.
+whitespace(s) in between numbers/commands are also OK. <br>
+
+#### Examples of Valid Inputs:
+- ```1 2 3```: proper one-space-separated line
+- ```   1 2   3 ;```: with leading/trailing whitespace(s), or multiple whitespaces in between
+
+#### Examples of Invalid Inputs:  
+- ```1 + 2```: not in proper RPN formation
+- ```sqrt```: no operable values
+- ```1.2.3```: malformed number. Will be then treated as command and then give ```The operation 1.2.3 is not supported.``` 
+warning
+- ```delete```: unsupported command. Will give ```The operation delete is not supported.``` warning
 
 ### Output
 After processing of each line of input (either successfully or ended with error), the current value stack of the 
