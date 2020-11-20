@@ -15,7 +15,8 @@ automatically run the JUnit tests with Maven Surefire plugin that comes with Mav
 
 ## Run
 To run this application in command line mode, please execute ```bin/rpn_calculator.sh```.<br>
-Your input will be evaluated line-by-line, until it is completely evaluated, or an error occurs.
+Your input will be evaluated line-by-line, until it is completely evaluated, or an error occurs.<br>
+Exit the application using ```Ctrl+C```.
 
 ### Format of Input
 Your input should be whitespace(s)-separated lists of numbers and/or commands. <br>
@@ -24,7 +25,7 @@ whitespace(s) in between numbers/commands are also OK. <br>
 
 #### Examples of Valid Inputs:
 - ```1 2 3```: proper one-space-separated line
-- ```   1 2   3 ;```: with leading/trailing whitespace(s), or multiple whitespaces in between
+- ```   1 2   3 ```: with leading/trailing whitespace(s), or multiple whitespaces in between
 
 #### Examples of Invalid Inputs:  
 - ```1 + 2```: not in proper RPN formation
@@ -94,9 +95,6 @@ parameters``` will be displayed. <br>
 If the top of the calculator stack is a negative number, a warning of ```Square root of negative number is not valid.```
  will be displayed. The ```sqrt``` command will just be ignored in this case, and you can continue your operation on the
  stack. E.g., ```1 2 3 -1 sqrt``` ==> ```stack: 1 2 3 -1```<br>
-
-# Key Assumptions
-
 
 # Future Plan
 ## Phase 2
