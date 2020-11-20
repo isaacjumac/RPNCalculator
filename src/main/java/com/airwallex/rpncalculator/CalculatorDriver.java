@@ -1,6 +1,7 @@
 package com.airwallex.rpncalculator;
 
 import com.airwallex.rpncalculator.command.Command;
+import com.airwallex.rpncalculator.command.CommandFactory;
 import com.airwallex.rpncalculator.command.calculation.CalculationCommand;
 import com.airwallex.rpncalculator.exception.InsufficientParameterException;
 
@@ -87,16 +88,21 @@ public class CalculatorDriver {
     private void processElement(String element) {
         try {
             BigDecimal operand = new BigDecimal(element);
-            calculator.recordNewValue(operand);
+            calculator.recordValue(operand);
         } catch (NumberFormatException nfe) {
             Command command = CommandFactory.getCommand(element, this, calculator);
             if (command == null) {
                 throw new UnsupportedOperationException(String.format("The operation %s is not supported.", element));
             }
-            command.execute();
+            try {
+                command.execute();
 
-            if (command instanceof CalculationCommand) {
-                calculationCommandHistory.push((CalculationCommand) command);
+                if (command instanceof CalculationCommand) {
+                    calculationCommandHistory.push((CalculationCommand) command);
+                }
+            } catch (ArithmeticException ae) {
+                System.out.println(ae.getMessage());
+
             }
         }
     }
@@ -122,7 +128,7 @@ public class CalculatorDriver {
             if (calculator.getValueCount() == 0) {
                 System.out.println("Nothing to undo.");
             } else {
-                calculator.removeOneValue();
+                calculator.popValue();
             }
         } else {
             calculationCommandHistory.pop().unexecute();

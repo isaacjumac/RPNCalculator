@@ -17,6 +17,6 @@ public class Divide extends CalculationCommand {
     @Override
     public void unexecute() {
         new Multiply(calculator, operand).execute();
-        calculator.recordNewValue(operand);
+        calculator.recordValue(operand);
     }
 }

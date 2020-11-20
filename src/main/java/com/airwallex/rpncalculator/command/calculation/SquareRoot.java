@@ -16,7 +16,7 @@ public class SquareRoot extends CalculationCommand {
 
     @Override
     public void unexecute() {
-        calculator.removeOneValue();
-        calculator.recordNewValue(operand);
+        calculator.popValue();
+        calculator.recordValue(operand);
     }
 }

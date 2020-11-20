@@ -17,6 +17,6 @@ public class Minus extends CalculationCommand {
     @Override
     public void unexecute() {
         new Plus(calculator, operand).execute();
-        calculator.recordNewValue(operand);
+        calculator.recordValue(operand);
     }
 }

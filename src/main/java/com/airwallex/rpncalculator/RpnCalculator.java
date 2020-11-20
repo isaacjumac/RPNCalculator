@@ -10,14 +10,28 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
+/**
+ * This the calculator that actually performs the calculations.
+ * <p>
+ * It can be extended to support more functionalities in the future.
+ *
+ * @author Zhu Zhaohua
+ */
 public class RpnCalculator {
     private Deque<BigDecimal> valueStack;
+
+    // Math context to be used, use DECIMAL128 by default, which provides 34 decimal digit precision
+    public static MathContext context = MathContext.DECIMAL64;
 
     // Default output format, with at most 10 decimal places
     private static final String OUTPUT_FORMAT = "#0.##########";
 
     public RpnCalculator() {
         valueStack = new ArrayDeque<>();
+    }
+
+    public void setContext(MathContext context) {
+        this.context = context;
     }
 
     public void doPlus(BigDecimal operand) {
@@ -36,21 +50,23 @@ public class RpnCalculator {
     }
 
     public void doDivision(BigDecimal operand) {
-        BigDecimal result = popValue().divide(operand);
+        if (operand.compareTo(BigDecimal.ZERO) == 0) {
+            throw new ArithmeticException("Dividing by 0 is not allowed.");
+        }
+        BigDecimal result = popValue().divide(operand, context);
         valueStack.push(result);
     }
 
     public void doSquareRoot(BigDecimal operand) {
-        BigDecimal result = operand.sqrt(MathContext.DECIMAL64);
+        if (operand.compareTo(BigDecimal.ZERO) < 0) {
+            throw new ArithmeticException("Square root of negative number is not valid.");
+        }
+        BigDecimal result = operand.sqrt(context);
         valueStack.push(result);
     }
 
-    public void clear() {
-        valueStack = new ArrayDeque<>();
-    }
-
-    public void removeOneValue() {
-        valueStack.pop();
+    public void recordValue(BigDecimal value) {
+        valueStack.push(value);
     }
 
     public BigDecimal popValue() {
@@ -60,10 +76,17 @@ public class RpnCalculator {
         return valueStack.pop();
     }
 
-    public void recordNewValue(BigDecimal operand) {
-        valueStack.push(operand);
+    public void clear() {
+        valueStack = new ArrayDeque<>();
     }
 
+    public int getValueCount() {
+        return valueStack.size();
+    }
+
+    /**
+     * Form a whitespace-separated string of values in the value stack.
+     */
     public String formValueStackString() {
         DecimalFormat formatter = new DecimalFormat(OUTPUT_FORMAT);
         formatter.setRoundingMode(RoundingMode.DOWN);
@@ -76,9 +99,5 @@ public class RpnCalculator {
         }
 
         return sb.toString();
-    }
-
-    public int getValueCount() {
-        return valueStack.size();
     }
 }

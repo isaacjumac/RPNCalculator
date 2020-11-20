@@ -6,9 +6,9 @@ import com.airwallex.rpncalculator.command.Command;
 import java.math.BigDecimal;
 
 /**
- * The abstract operator class for all operators to be used in the RPN Calculator
+ * The abstract class for calculation operator commands.
  * <p>
- * New types of operator/feature can be implemented by extending this class
+ * New types of calculation operators can be implemented by extending this class
  *
  * @author Zhu Zhaohua
  */
