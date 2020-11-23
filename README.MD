@@ -82,7 +82,7 @@ Requires at least 2 values in the value stack of the calculator. Otherwise, a wa
  insufficient parameters``` will be displayed.<br>
 
 4. ```/```: division <br>
-The calculation will happen like this: <2nd top value in the value stack> / <top value in the value stack>. The result will be pushed into the value stack. E.g., ```1 2 /``` 
+The calculation will happen like this: `<2nd top value in the value stack> / <top value in the value stack>`. The result will be pushed into the value stack. E.g., ```1 2 /``` 
 ==> ```stack: 0.5``` <br><br>
 Requires at least 2 values in the value stack of the calculator. Otherwise, a warning of ```operator / (position:<pos>):
  insufficient parameters``` will be displayed.<br>
