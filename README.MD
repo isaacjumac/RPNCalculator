@@ -1,6 +1,6 @@
 # Overview
 This is a command-line based RPN (Reverse Polish Notation) calculator that is able to evaluate user input of numbers 
-and operators/commands and perform corresponding calculation/operation in the RPN manner. For details of how what is RPN
+and operators/commands and perform corresponding calculation/operation in the RPN manner. For details of what is RPN
 and how it is evaluated, please refer here: https://en.wikipedia.org/wiki/Reverse_Polish_notation.
 
 # How to Use
@@ -76,19 +76,19 @@ Requires at least 2 values in the value stack of the calculator. Otherwise, a wa
  insufficient parameters``` will be displayed.<br>
 
 3. ```*```: multiplication <br>
-The top 2 numbers in the value stack will be added. The result will be pushed into the value stack. E.g., ```2 3 *``` 
+The top 2 numbers in the value stack will be multiplied. The result will be pushed into the value stack. E.g., ```2 3 *``` 
 ==> ```stack: 6``` <br>
 Requires at least 2 values in the value stack of the calculator. Otherwise, a warning of ```operator * (position:<pos>):
  insufficient parameters``` will be displayed.<br>
 
 4. ```/```: division <br>
-The top 2 numbers in the value stack will be added. The result will be pushed into the value stack. E.g., ```1 2 /``` 
+The calculation will happen like this: <2nd top value in the value stack> / <top value in the value stack>. The result will be pushed into the value stack. E.g., ```1 2 /``` 
 ==> ```stack: 0.5``` <br><br>
 Requires at least 2 values in the value stack of the calculator. Otherwise, a warning of ```operator / (position:<pos>):
  insufficient parameters``` will be displayed.<br>
 
 5. ```sqrt```: square root <br>
-The top 2 numbers in the value stack will be added. The result will be pushed into the value stack. E.g., ```2 sqrt``` 
+The square root of the top number in the value stack will be calculated. The result will be pushed into the value stack. E.g., ```2 sqrt``` 
 ==> ```stack: 1.4142135623``` <br><br>
 If there is no value in the value stack of the calculator, a warning of ```operator sqrt (position:<pos>): insufficient 
 parameters``` will be displayed. <br>
